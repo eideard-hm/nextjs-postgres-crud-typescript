@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { NextApiRequest, NextApiResponse } from "next";
-import { conn } from "../../../utils/postgres";
+import { conn } from 'src/utils/postgres';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { method, body, query: { id } } = req;
