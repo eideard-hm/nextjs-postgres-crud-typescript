@@ -13,6 +13,5 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
             return res.json('Delete a task');
         default:
             return res.status(400).json('Method not allowed');
-            break;
     }
 }
