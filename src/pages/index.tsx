@@ -1,12 +1,38 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { Props, Tasks } from 'src/interfaces/tasks.interfaces'
 
-const Home: NextPage = () => {
+const index = ({ tasks }: Props) => {
   return (
-    <h1>Hello world</h1>
+    <>
+      {tasks.length === 0 ? (
+        <h1>No tasks available</h1>
+      ) : (
+        <>
+          <h1>Tasks list</h1>
+          <ul>
+            {tasks.map(task => (
+              <li key={task.id}>{task.title}</li>
+            ))}
+          </ul>
+        </>
+      )}
+    </>
   )
 }
 
-export default Home
+/*
+ * Ejecutar código desde un backend
+ */
+
+export const getServerSideProps = async () => {
+  // hacer una cosulta al backend
+  const res = await fetch('http://localhost:3000/api/tasks')
+  const tasks: Tasks[] = await res.json()
+
+  return {
+    props: {
+      tasks
+    }
+  }
+}
+
+export default index
